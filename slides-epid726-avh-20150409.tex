@@ -1,0 +1,371 @@
+% slides-epid726-avh-20150406.tex
+
+%\documentclass[10pt, handout	]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[10pt]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+
+%
+%% BEGINNING of code from http://tex.stackexchange.com/questions/47747/condense-beamer-notes-into-one-page 
+%% ------------------------------------------------------------
+%\newif\ifshowonlynotes
+%\showonlynotestrue
+%%\showonlynotesfalse
+%
+%\makeatletter
+%\newif\ifbeamer@inlecture\beamer@inlecturetrue
+%\def\beamer@currentmode{beamer}
+%\input{beamerbasenotes.sty}
+%\def\beamer@currentmode{article}
+%
+%\renewcommand\beamer@outsideframenote[2][]{%
+  %\def\beamer@noteenvstart{}%
+  %\def\beamer@noteenvend{}%
+  %\setkeys{beamernotes}{#1}%
+  %\par
+  %\beamer@noteenvstart#2\beamer@noteenvend%
+  %\par
+%}
+%
+%\setbeamertemplate{frame begin}{\beamer@framenotesbegin}
+%\setbeamertemplate{frame end}{\beamer@setupnote\beamer@notesactions}
+%
+%\ifshowonlynotes
+  %\let\beamer@dosingleframe=\beamer@donoframe
+  %\g@addto@macro\beamer@endframe{\usebeamertemplate{frame end}}
+%\fi
+%\makeatother
+%% ------------ END of code from http://tex.stackexchange.com/questions/47747/condense-beamer-notes-into-one-page
+
+\note{USE THIS TO PRINT OFF NOTES..............}
+%\setbeameroption{show notes} %un-comment to see the notes
+\setbeameroption{show only notes}
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+%\usetheme{Madrid}
+%\usetheme{PaloAlto}
+%\usetheme{Dresden}
+%\usetheme{Singapore}
+\usetheme{Frankfurt}
+%\usetheme{Szeged}
+\usecolortheme{beetle}
+%\usecolortheme{tarheel2}
+%\usefonttheme[stillsansserifsmall]{serif}
+
+%\usepackage[english]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[orientation=landscape, size=custom,width=142.24, height=91.44, scale=1.7]{beamerposter} % these match 56 by 36 inches -- ARIC template
+%\usepackage[orientation=landscape, size=a0, scale=1.5]{beamerposter}
+%\usepackage[numbers,sort]{natbib}
+\usepackage{alltt}
+\usepackage{amsmath}
+
+\usepackage{array,booktabs,tabularx}
+%\usepackage[skip=0pt]{caption} %caption does not recognize beamer. don't use
+\usepackage{graphicx,wrapfig,lipsum}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage[font=small,begintext=\textquotedblleft,endtext=\textquotedblright]{quoting} % this option sets font size of quotes automatically.
+\usepackage{pifont}
+%\usepackage{caption}
+%\usepackage{pgf,tikz} % see http://codealamode.blogspot.com/2013/06/drawing-dags-latex-solution.html
+% for some reason if I exclude tikz this works. is there a conflict with some other package?
+%\usetikzlibrary{matrix, shapes, arrows, positioning, chains}
+%\usepackage[T1]{fontenc}
+%\usepackage{arev}
+
+\setbeamersize{text margin left=10pt,text margin right=10pt} %set margin sizes
+
+\note{Print this off before lecture}
+%\usepackage{handoutWithNotes} % see http://tex.stackexchange.com/questions/4765/printing-beamer-slides
+%% \pgfpagesuselayout{4 on 1}[a4paper,landscape,border shrink=5mm
+%\pgfpagesuselayout{4 on 1 with notes}[a4paper,border shrink=5mm]
+
+% see http://tex.stackexchange.com/questions/12703/how-to-create-fixed-width-table-columns-with-text-raggedright-centered-raggedlef
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% got from http://tex.stackexchange.com/questions/48023/mimic-bibtex-apalike-with-biblatex-biblatex-apa-broken
+\PassOptionsToPackage{
+        style=numeric,
+        hyperref=true,
+        backend=bibtex,
+        maxbibnames=99,
+        firstinits=true,
+        uniquename=init,
+        maxcitenames=2,
+        parentracker=true,
+        url=false,
+        doi=true,
+        isbn=false,
+        eprint=false,
+        backref=true,
+            }   {biblatex}
+
+\usepackage{biblatex}
+\addbibresource{bib1}
+% see http://tex.stackexchange.com/questions/43083/author-year-abbr-journal-name-as-citation-style
+\DeclareCiteCommand{\longcite}{(}{%
+    \printnames[author]{author}, \printfield{year})}{}{}%
+
+\newcommand{\customcite}[1]{\citeauthor{#1}, \citetitle{#1}, \citeyear{#1}}
+\newcommand{\customcitetwo}[1]{\citeauthor{#1}, \citeyear{#1}}
+
+\renewcommand{\footnotesize}{\tiny}  % change font size of citation
+\renewcommand\multicitedelim{\addsemicolon\space} % This doesn't seem to work, but see http://tex.stackexchange.com/questions/167665/multiple-references-with-footfullcite
+
+
+% This is based on the template at http://www-i6.informatik.rwth-aachen.de/~dreuw/latexbeamerposter.php
+
+%%%%%%%%%%%%%%%%%%%%% Edit this section with your info %%%%%%%%%%%%%%%%%%%%%%%
+% see http://tex.stackexchange.com/questions/9740/how-can-i-add-vertical-space-to-a-beamercolorbox-to-make-it-align-with-another-o
+\title[Infant growth trajectories and adolescent HDL-C]{Infant growth trajectories and high density lipoprotein cholesterol levels in adolescence. \rule[-1\normalbaselineskip]{0pt}{0pt}}
+%\title{\setlength\lineskip{20pt}Childhood BMI associated with low HDL-C levels in adolescence in a Chilean cohort}
+%\title{Childhood BMI associated with low HDL-C levels in adolescence in a Chilean cohort}
+\author[vonholle@email.unc.edu]{\small Ann Von Holle}
+%\author{\small Ann Von Holle}
+%\titlegraphic{\includegraphics[scale=0.25]{logoblackontranspsmall.png}\includegraphics[scale=0.1]{gl-2-hsci}} %this is the path to your logo
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\newcommand\Fontvi{\fontsize{6}{7.2}\selectfont}
+
+\setbeamertemplate{itemize items}[square]
+
+\AtBeginSection[] % http://tex.stackexchange.com/questions/28654/beamer-table-of-contents-display-all-subsections-below-section
+{
+\begin{frame}<beamer>{Table of Contents}
+\tableofcontents[currentsection,%currentsubsection, 
+    hideallsubsections, 
+		sectionstyle=show/shaded,
+]
+\end{frame}
+}
+
+\begin{document}
+
+\setbeamertemplate{caption}{\insertcaption}
+
+\begin{frame}
+\titlepage
+\centering
+\end{frame}
+
+\section{Significance and Innovation}
+
+\note{I will start with some background on the outcome of interest and theory informing my aims.}
+
+\subsection{CVD}
+\begin{frame}
+\frametitle{Cardiovascular disease (CVD) and high density lipoprotein cholesterol (HDL-C)}
+\begin{itemize}
+\item Cardiovascular disease (CVD) is a chronic disease responsible for one out of every three deaths in the United States.
+\smallskip
+\item Primary and modifiable risk factors including blood pressure, smoking, physical inactivity, obesity, and blood cholesterol. 
+\smallskip
+\item High density lipoprotein cholesterol (HDL-C) is one of the blood cholesterols.
+	\begin{itemize}
+		\item A strong risk factor for CVD.
+		\item Function in the development of CVD remains unknown.
+		\item Investigation remains active to determine both HDL function in atherosclerosis and potential areas for intervention such as pharmacotherapy.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\subsection{DOoHD}
+\begin{frame}
+\frametitle{Developmental Origins of Health and Disease}
+\centering
+\includegraphics[scale=0.25]{hanson-fig1}
+\footfullcite{hanson_early_2014}
+\note{This figure is a lifecourse view/perspective of noncommunicable disease risk.}
+\note{DOHaD proposes that a wide range of environmental conditions during embryonic development and early life determine susceptibility to disease during adult life.}
+\note{Early life events influence chronic disease susceptibility and as a result, best point to intervene is in early life.}
+\end{frame}
+
+\subsection{Postnatal growth}
+\begin{frame}
+\frametitle{Postnatal growth and HDL-C}
+
+\begin{itemize}
+	\item Repeated animal and human studies have shown that postnatal growth is associated with the later development of adverse cardiovascular risk factors like low HDL-C levels.
+\end{itemize}
+
+\begin{table}[H]
+\begin{tabular}{llC{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+ & Author     & Year published & Direction of growth with increase in HDL-C & 2+ observations in change measure & Non-European sample? \\
+\midrule
+1 & Corvalan   & 2009           & +                                    &              & \ding{52}               \\
+2 & Ekelund    & 2007           & +      	                             &               &               \\
+3 & Howe       & 2010           & --                              &               &               \\
+4 & Kajantie   & 2008           & +                                    &               &               \\
+5 & Leunissen  & 2009           & --                              &               &               \\
+6 & Oostvogels & 2014           & --                              &               &               \\
+7 & Tzoulaki   & 2010           & +                                    & \ding{52}    &              \\
+\bottomrule
+\end{tabular}
+\end{table}
+\smallskip
+%	\item Most studies addressing the hypothesis of growth effects on HDL-C are limited in their characterization of growth and predominantly European and homogenous in racial and ethnic composition. 
+%\end{itemize}
+\end{frame}
+\note{These studies have persisted across different cohort years.}
+
+
+\begin{frame}
+\frametitle{Postnatal growth as an environmental cue}
+\begin{itemize}
+	\item Abnormal postnatal growth hypothesized to alter liver growth and subsequent HDL metabolism\footfullcite{kajantie_growth_2008, perala_early_2012}.
+\end{itemize}
+\centering
+\includegraphics[scale=0.11]{fig-timeline-rev}
+\end{frame}
+
+\section{Specific Aims}
+
+\subsection{Aim 1}
+\begin{frame}
+\frametitle{Aims}
+Overall: 
+\begin{itemize}
+	\item Investigate the association between postnatal growth trajectories and HDL-C levels in adolescence
+		\begin{itemize}
+			\item Contemporary Chilean birth cohort with monthly measures of weight in the first year of life 
+			\item High quality clinical measures of cardiovascular disease risk factors.
+			\end{itemize}
+		\end{itemize}
+\smallskip
+
+\textit{Note: Unless otherwise indicated, postnatal growth trajectories are in terms of a weight-for-length outcome.}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Aim 1}
+What do growth trajectories look like for infants from 0 to 12 months and what are some significant predictors?
+\smallskip
+\begin{description}
+	\item [Aim 1]  Characterize individual growth trajectories in the first year of life and replicate predictors of growth using external validation with an independent sample. 
+\end{description}	
+
+\begin{itemize} 
+\item We expect to replicate previous findings\footfullcite{pizzi_prenatal_2014} indicating a positive association between:
+	\begin{enumerate} 
+		\item Maternal characteristics such as pre-pregnancy BMI, height and age with trajectory size.
+		\item Maternal education and trajectory velocity.
+		\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\subsection{Aim 2}
+\begin{frame}
+\frametitle{Aim 2}
+Are there any specific types of postnatal growth trajectories associated with adverse levels of HDL-C?
+\smallskip
+
+\begin{description}
+	\item[Aim 2] Examine the association between postnatal growth trajectories and HDL-C levels.
+\end{description}
+
+\begin{itemize} 
+\item Based on prior evidence we expect
+	\begin{enumerate} 
+		\item Infants with steeper growth trajectories to associate with adverse HDL-C levels in adolescence.
+		\item Males will show a stronger association between size, tempo and velocity measures than females.
+		\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\subsection{Aim 3}
+\begin{frame}
+\frametitle{Aim 3}
+Do growth trajectories modify the association between genetic variants related to HDL metabolism and HDL-C levels in adolescence?
+\begin{description}
+	\item[Aim 3] Assess gene-environment interaction between growth trajectory characteristics and genetic variants of HDL metabolism with HDL-C at 17 years of age as an outcome.
+\end{description}
+
+\begin{itemize}
+\item We expect that
+	\begin{enumerate} 
+		\item The selected genetic variants will associate with HDL-C levels in adolescence.
+		\item A gene-environment interaction exists in which extreme and less favorable growth characteristics will exhibit stronger, deleterious associations between the genetic variants and HDL-C levels.
+		\end{enumerate}
+\end{itemize}
+
+\end{frame}
+
+
+\section{Approach}
+
+\subsection{SITAR}
+\begin{frame}
+\frametitle{SITAR method}
+SITAR: SuperImposition by Translation And Rotation\footfullcite{beath_infant_2007,cole_sitar--useful_2010}.\\
+\smallskip
+Use SITAR to measure three measures of postnatal growth: size, tempo and velocity.
+\smallskip
+
+\centering
+\includegraphics[scale=0.35]{sim-growth-2}
+\end{frame}
+
+\subsection{LGMM}
+\begin{frame}
+\frametitle{Latent growth mixture models (LGMM)}
+Use LGMM to identify underlying patterns in infant growth and regress HDL-C levels on these latent groups.
+
+\centering
+\includegraphics[scale=0.4]{sim-lgmm-2}
+\end{frame}
+
+\section{Strength and Limitations}
+
+\subsection{Strength and Limitations}
+\begin{frame}
+
+\underline{Strengths}:
+\begin{description}
+	\item[Underepresented sample] The majority of studies on this topic to date involve European populations.
+	\item[Detail] This project uses methods unavailable to most prior studies due to limited number of postnatal growth observations.
+%	\item[Gene-environment interaction] No study has examined gene-environment interactions relating to HDL metabolism and postnatal growth.
+	\end{description}
+	
+\underline{Limitations}:
+\begin{description}
+	\item[Outcome a proxy] Many factors contribute to postnatal growth trajectories. Infants with similar trajectories could experience different prior exposures and different risk later in life\footfullcite{hanson_early_2014}.
+	\item[Washout] Cumulative exposures to adverse life circumstances over the life course wash out any effect present in infancy\footfullcite{valente_relation_2015}.
+%	\item[Homogeneity of growth] Most mothers in sample breastfed in the first six months and growth may be more homogenous than samples with more formula feeding.
+	\end{description}
+\end{frame}
+
+\section{Public Health Implications}
+\subsection{Public Health Implications}
+\begin{frame}
+Results from this research can:
+\begin{itemize}
+\item Inform efforts to identify predictors of HDL-C and its accompanying risk of CVD
+\item Support of postnatal growth as an environmental cue inducing permanent change of HDL metabolism. 
+\end{itemize}
+
+\mediumskip
+Further attention would be warranted to investigate the composition of optimal postnatal growth. These interventions would have the potential for modification of CVD later in life.
+
+\end{frame}
+
+\begin{frame}
+Special thanks to my
+\begin{itemize}
+	\item In-class reviewers: Nelson Pace and Sydney Jones
+	\item Group leader: Dr. Julie Daniels
+	\end{itemize}
+	
+	Web page: vonholle.web.unc.edu
+\end{frame}
+\end{document}
