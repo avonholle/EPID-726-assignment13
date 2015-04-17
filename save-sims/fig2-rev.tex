@@ -1,0 +1,62 @@
+% see http://randomresearchdata.blogspot.com/2013/09/i-think-tikz-iz-fantaztic.html
+
+\documentclass[border=3mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+\newcommand{\at}{\makeatletter @\makeatother}
+
+\begin{document}
+
+\begin{tikzpicture}[auto,node distance=.5cm,
+    latent/.style={circle,draw,ultra thick,inner sep=0pt,minimum size=16mm,align=center},
+    manifest/.style={rectangle,draw,inner sep=0pt,minimum width=20mm,minimum height=12mm},
+    paths/.style={->, ultra thick, >=stealth'},
+    twopaths/.style={<->, ultra thick, >=stealth'}
+]
+
+% Define observed variables
+\Large{
+\node [manifest] (i1) at (0,0) [align=center] {WFL \\ month 1};
+\node [manifest] (i2) [right=of i1, align=center]  {WFL \\ month 2};
+\node [manifest] (i3) [right=of i2, align=center]  {WFL \\ month 3}; 
+\node [manifest] (i4) [right=of i3, align=center]  {WFL \\ month 4};
+\node [manifest] (i5) [right=of i4, align=center]  {WFL \\ month 5};
+\node [manifest] (i6) [right=of i5, align=center]  {WFL \\ month 6};
+\node [manifest] (i7) [right=of i6, align=center]  {WFL \\ month 7};
+\node [manifest] (i8) [right=of i7, align=center]  {WFL \\ month 8};
+\node [manifest] (i9) [right=of i8, align=center]  {WFL \\ month 9};
+\node [manifest] (i10) [right=of i9, align=center]  {WFL \\ month 10};
+\node [manifest] (i11) [right=of i10, align=center]  {WFL \\ month 11};
+\node [manifest] (i12) [right=of i11, align=center]  {WFL \\ month 12};
+}
+% Define latent variables
+\node [latent] (int1) [below=3.5cm of i4] {\Large Intercept};
+\node [latent] (slope1) [below=3.5cm of i9] {\Large Slope};
+
+\node [latent] (cat1) [below=7cm of i7] {\Large Latent class \\ \Large groups};
+\node [manifest] (d1) [right=4cm of cat1, align=center] {HDL-C \\ at 17 years};
+
+
+% Draw paths form latent to observed variables
+\foreach \all in {i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12}{
+    \draw [paths] (int1.north) to node { } (\all.south);
+}
+
+\foreach \all in {i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12}{
+    \draw [paths] (slope1.north) to node { } (\all.south);
+}
+
+% path from class variable to latent int and slope
+\foreach \all in {int1, slope1}{
+    \draw [paths] (cat1.north) to node { } (\all.south);
+}
+
+\draw[paths] (cat1.east) to (d1.west);
+
+\path [line, ultra thick] (int1) edge[loop left] ();
+\path [line, ultra thick] (slope1) edge[loop right] ();
+
+\end{tikzpicture}
+
+
+\end{document} 

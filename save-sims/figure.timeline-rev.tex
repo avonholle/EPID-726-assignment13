@@ -1,0 +1,38 @@
+ \documentclass[convert={density=300,size=1080x800,outext=.png}]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{timeline}
+\begin{document}
+\begin{tikzpicture}[timespan={}]
+% timespan={Day} -> now we have days as reference
+% timespan={} -> no label is displayed for the timespan
+% default timespan is 'Week'
+
+% for code, see https://github.com/cfiandra/timeline/blob/master/tikzlibrarytimeline.code.tex
+% for 
+
+\timeline[custom interval=true]{prenatal growth, birth, $\rightarrow$ , postnatal growth, $\rightarrow$, adolescence, adulthood}
+% \timeline[custom interval=true]{3,...,9} -> i.e., from Day 3 to Day 9
+% \timeline{8} -> i.e., from Week 1 to Week 8
+% put here the phases
+\begin{phases}
+%\initialphase{between week=0 and 0 in 0.1, involvement degree=1.75cm,phase color=black}
+\phase{between week=1 and 1 in 0.1,involvement degree=2cm}
+\phase{between week=2 and 2 in 0.1,involvement degree=2cm}
+\phase{between week=3 and 3 in 0.5,involvement degree=2cm}
+\phase{between week=4 and 4 in 0.5,involvement degree=2cm}
+\phase{between week=5 and 5 in 0.5,involvement degree=2cm}
+\phase{between week=6 and 6 in 0.5,involvement degree=2cm}
+\phase{between week=7 and 7 in 0.5,involvement degree=2cm}
+\end{phases}
+
+% put here the milestones
+%\addmilestone{at=phase-1.7,direction=270:1cm,text={Organ growth alteration},text options={above}}
+\addmilestone{at=phase-3.110, direction=120:0.25cm, text={Faster infant growth}, text options={above}}
+\addmilestone{at=phase-3.290, direction=285:0.25cm, text={Altered liver growth}, text options={below}}
+\addmilestone{at=phase-4.90, direction=90:0.75cm, text={Altered HDL metabolism}, text options={above}}
+\addmilestone{at=phase-5.270, direction=270:0.5cm, text={Modified gene expression}, text options={below}}
+\addmilestone{at=phase-6.310, direction=320:1cm, text={Non-optimal HDL levels}, text options={below}}
+\addmilestone{at=phase-7.90, direction=90:0.5cm, text={CVD}, text options={above}}
+\end{tikzpicture}
+
+\end{document}
